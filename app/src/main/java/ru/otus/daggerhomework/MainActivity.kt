@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +13,8 @@ class MainActivity : AppCompatActivity() {
     @ApplicationContext
     lateinit var appContext: Context
 
-    private val uiState = MutableStateFlow<AppUiState>(AppUiState.ColorChangeEvent(0))
+    private val _uiState = MutableStateFlow<AppUiState>(AppUiState.ColorChangeEvent(0))
+    val uiState: StateFlow<AppUiState> = _uiState
 
     lateinit var mainActivityComponent: MainActivityComponent
         private set
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityComponent = SingleApplicationComponent
             .getInstance()
             .mainActivityComponentFactory()
-            .create(uiState, this)
+            .create(uiState, _uiState, this)
         mainActivityComponent.inject(this)
     }
 }

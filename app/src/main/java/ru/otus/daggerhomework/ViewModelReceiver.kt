@@ -3,11 +3,11 @@ package ru.otus.daggerhomework
 import android.app.Application
 import android.content.Context
 import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class ViewModelReceiver @Inject constructor(
-    private val uiState: MutableStateFlow<AppUiState>,
+    @UiState private val uiState: StateFlow<AppUiState>,
     @ApplicationContext private val context: Context
 ) {
     suspend fun observeColors(collector: FlowCollector<AppUiState>) {

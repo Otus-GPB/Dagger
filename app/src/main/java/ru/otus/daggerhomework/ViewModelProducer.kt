@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 class ViewModelProducer @Inject constructor(
-    private val uiState: MutableStateFlow<AppUiState>,
+    @MutableUiState private val uiState: MutableStateFlow<AppUiState>,
     private val colorGenerator: ColorGenerator,
     @ActivityContext private val context: Context
 ) {
