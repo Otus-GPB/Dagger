@@ -4,25 +4,47 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class FragmentReceiver : Fragment() {
+    private lateinit var fragmentReceiverComponent: FragmentReceiverComponent
 
     private lateinit var frame: View
+
+    @Inject
+    lateinit var viewModelReceiver: ViewModelReceiver
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_b, container, true)
+        fragmentReceiverComponent = (activity as MainActivity).mainActivityComponent
+            .fragmentReceiverComponent().create()
+        fragmentReceiverComponent.inject(this)
+        return inflater.inflate(R.layout.fragment_b, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         frame = view.findViewById(R.id.frame)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModelReceiver.observeColors { newState ->
+                    when (newState) {
+                        is AppUiState.ColorChangeEvent -> populateColor(newState.color)
+                    }
+                    Toast.makeText(context, "Color received", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     fun populateColor(@ColorInt color: Int) {
