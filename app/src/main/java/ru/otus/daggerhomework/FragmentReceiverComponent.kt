@@ -2,7 +2,6 @@ package ru.otus.daggerhomework
 
 import dagger.Subcomponent
 
-@MySingletonScope
 @Subcomponent
 interface FragmentReceiverComponent {
     @Subcomponent.Factory

@@ -4,7 +4,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.Subcomponent
 
-@MySingletonScope
 @Subcomponent(modules = [FragmentProducerModule::class])
 interface FragmentProducerComponent {
     @Subcomponent.Factory

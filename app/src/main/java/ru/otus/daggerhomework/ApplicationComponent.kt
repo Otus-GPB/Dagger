@@ -10,6 +10,7 @@ import javax.inject.Scope
 @Qualifier
 annotation class ApplicationContext
 
+@MySingletonScope
 @Component(modules = [AppSubcomponents::class])
 interface ApplicationComponent{
     @Component.Factory
