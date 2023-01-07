@@ -31,18 +31,18 @@ interface MainActivityComponent {
 
 @Module(subcomponents = [FragmentReceiverComponent::class,
     FragmentProducerComponent::class])
-class MainActivityModule {
-    private val _uiState = MutableStateFlow(ColorChangeEvent(0))
+object MainActivityModule {
+    private val mUiState = MutableStateFlow(ColorChangeEvent(0))
 
     @Provides
     @UiState
     fun providesUiState(): StateFlow<ColorChangeEvent> {
-        return _uiState
+        return mUiState
     }
 
     @Provides
     @MutableUiState
     fun providesMutableUiState(): MutableStateFlow<ColorChangeEvent> {
-        return _uiState
+        return mUiState
     }
 }
