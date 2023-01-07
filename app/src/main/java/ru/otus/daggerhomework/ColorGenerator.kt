@@ -10,7 +10,6 @@ interface ColorGenerator {
     fun generateColor(): Int
 }
 
-
 class ColorGeneratorImpl @Inject constructor() : ColorGenerator {
     override fun generateColor(): Int {
         val rnd = Random()

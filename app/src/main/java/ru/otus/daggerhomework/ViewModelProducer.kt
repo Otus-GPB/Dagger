@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 class ViewModelProducer @Inject constructor(
-    @MutableUiState private val uiState: MutableStateFlow<AppUiState>,
+    @MutableUiState private val uiState: MutableStateFlow<ColorChangeEvent>,
     private val colorGenerator: ColorGenerator,
     @ActivityContext private val context: Context
 ) {
     fun generateColor() {
         if (context !is FragmentActivity) throw RuntimeException("Здесь нужен контекст активити")
         Toast.makeText(context, "Color sent", Toast.LENGTH_LONG).show()
-        uiState.value = AppUiState.ColorChangeEvent(colorGenerator.generateColor())
+        uiState.value = ColorChangeEvent(colorGenerator.generateColor())
     }
 }

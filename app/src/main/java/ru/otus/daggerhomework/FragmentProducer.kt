@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import javax.inject.Inject
 
 class FragmentProducer : Fragment() {
-
-    private lateinit var fragmentProducerComponent: FragmentProducerComponent
-
     @Inject
     lateinit var viewModelProducer: ViewModelProducer
 
@@ -20,9 +17,8 @@ class FragmentProducer : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentProducerComponent = (activity as MainActivity).mainActivityComponent
-            .fragmentProducerComponent().create()
-        fragmentProducerComponent.inject(this)
+        (activity as MainActivity).mainActivityComponent
+            .fragmentProducerComponent().create().inject(this)
         return inflater.inflate(R.layout.fragment_a, container, false)
     }
 

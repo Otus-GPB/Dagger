@@ -14,21 +14,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FragmentReceiver : Fragment() {
-    private lateinit var fragmentReceiverComponent: FragmentReceiverComponent
-
     private lateinit var frame: View
 
     @Inject
     lateinit var viewModelReceiver: ViewModelReceiver
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).mainActivityComponent
+            .fragmentReceiverComponent().create().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentReceiverComponent = (activity as MainActivity).mainActivityComponent
-            .fragmentReceiverComponent().create()
-        fragmentReceiverComponent.inject(this)
         return inflater.inflate(R.layout.fragment_b, container, false)
     }
 
@@ -38,16 +39,14 @@ class FragmentReceiver : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModelReceiver.observeColors { newState ->
-                    when (newState) {
-                        is AppUiState.ColorChangeEvent -> populateColor(newState.color)
-                    }
+                    populateColor(newState.color)
                     Toast.makeText(context, "Color received", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
-    fun populateColor(@ColorInt color: Int) {
+    private fun populateColor(@ColorInt color: Int) {
         frame.setBackgroundColor(color)
     }
 }

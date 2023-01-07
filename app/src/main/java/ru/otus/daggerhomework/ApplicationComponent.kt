@@ -11,7 +11,7 @@ import javax.inject.Scope
 annotation class ApplicationContext
 
 @MySingletonScope
-@Component(modules = [AppSubcomponents::class])
+@Component(modules = [AppSubcomponentsModule::class])
 interface ApplicationComponent{
     @Component.Factory
     interface Factory{
@@ -22,8 +22,7 @@ interface ApplicationComponent{
 }
 
 @Module(subcomponents = [MainActivityComponent::class])
-class AppSubcomponents
-
+class AppSubcomponentsModule
 
 @Scope
 annotation class MySingletonScope

@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class ViewModelReceiver @Inject constructor(
-    @UiState private val uiState: StateFlow<AppUiState>,
+    @UiState private val uiState: StateFlow<ColorChangeEvent>,
     @ApplicationContext private val context: Context
 ) {
-    suspend fun observeColors(collector: FlowCollector<AppUiState>) {
+    suspend fun observeColors(collector: FlowCollector<ColorChangeEvent>) {
         if (context !is Application) throw RuntimeException("Здесь нужен контекст апликейшена")
         uiState.collect(collector)
     }
