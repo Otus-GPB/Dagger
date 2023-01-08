@@ -4,8 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.LiveData
+import javax.inject.Inject
 
-class ViewModelReceiver(
+class ViewModelReceiver @Inject constructor(
     private val context: Context,
     private val colorState: LiveData<Int>
 ) {

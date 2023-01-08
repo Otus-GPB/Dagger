@@ -4,8 +4,7 @@ import dagger.Component
 
 @ReceiverScope
 @Component(
-    dependencies = [MainActivityComponent::class],
-    modules = [ReceiverModule::class]
+    dependencies = [MainActivityComponent::class]
 )
 interface FragmentReceiverComponent {
 

@@ -1,21 +1,12 @@
 package ru.otus.daggerhomework
 
-import androidx.lifecycle.MutableLiveData
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
-class ProducerModule {
+interface ProducerModule {
 
     @ProducerScope
-    @Provides
-    fun provideViewModelProducer(
-        colorGenerator: ColorGenerator,
-        activity: MainActivity,
-        colorState: MutableLiveData<Int>
-    ): ViewModelProducer = ViewModelProducer(colorGenerator, activity, colorState)
-
-    @ProducerScope
-    @Provides
-    fun provideColorGenerator(): ColorGenerator = ColorGeneratorImpl()
+    @Binds
+    fun colorGenerator(impl: ColorGeneratorImpl): ColorGenerator
 }

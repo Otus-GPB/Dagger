@@ -1,9 +1,11 @@
 package ru.otus.daggerhomework
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Named
 
 @ActivityScope
 @Component(
@@ -20,7 +22,9 @@ interface MainActivityComponent {
         : MainActivityComponent
     }
 
-    fun provideStateColor(): MutableLiveData<Int>
-    fun provideMainActivity(): MainActivity
+    fun provideMutableStateColor(): MutableLiveData<Int>
+    fun provideStateColor(): LiveData<Int>
+    @Named("MainActivity")
+    fun provideMainActivity(): Context
     fun provideContext(): Context
 }
