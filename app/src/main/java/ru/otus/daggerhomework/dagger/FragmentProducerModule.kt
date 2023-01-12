@@ -8,10 +8,9 @@ import ru.otus.daggerhomework.*
 
 @Module()
 class FragmentProducerModule {
-
    @FragmentScope
     @Provides
-    fun provideProduser(
+    fun provideProducer(
         generator: ColorGenerator,
         context: MainActivity,
         mutableData: MutableLiveData<Int>
@@ -21,8 +20,7 @@ class FragmentProducerModule {
 }
 
 @Module
-abstract class Implement {
-    @FragmentScope
+interface Implement {
     @Binds
-    abstract fun toGenerator(generator: ColorGeneratorImpl): ColorGenerator
+    fun toGenerator(generator: ColorGeneratorImpl): ColorGenerator
 }

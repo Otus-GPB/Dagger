@@ -9,7 +9,6 @@ import ru.otus.daggerhomework.MainActivity
 
 @Component (modules = [Provider::class])
 interface ApplicationComponent {
-    fun inject(MainActivity: MainActivity)
     val getAppContext: Context
 
     @Component.Factory

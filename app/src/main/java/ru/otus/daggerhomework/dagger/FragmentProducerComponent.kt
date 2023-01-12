@@ -5,12 +5,11 @@ import dagger.Component
 import ru.otus.daggerhomework.*
 import javax.inject.Scope
 
-@Component(dependencies = [MainActivityComponent::class], modules = [FragmentProducerModule::class, Implement::class])
 @FragmentScope
+@Component(dependencies = [MainActivityComponent::class], modules = [FragmentProducerModule::class, Implement::class])
 interface FragmentProducerComponent {
 
     fun inject(fragment: FragmentProducer)
-    fun getviewModelProducer(): ViewModelProducer
 
     @Component.Builder
     interface BuilderFragmentProducer {
@@ -20,6 +19,3 @@ interface FragmentProducerComponent {
         fun build(): FragmentProducerComponent
     }
 }
-
-@Scope
-annotation class FragmentScope

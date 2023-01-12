@@ -4,12 +4,11 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.otus.daggerhomework.FragmentReceiver
 import ru.otus.daggerhomework.ViewModelReceiver
+import javax.inject.Scope
 
-@Component(dependencies = [MainActivityComponent::class], modules = [FragmentReceiverModule::class])
 @FragmentScope
+@Component(dependencies = [MainActivityComponent::class], modules = [FragmentReceiverModule::class])
 interface FragmentReceiverComponent {
-    fun getFragment(): FragmentReceiver
-    fun getviewModelProducer(): ViewModelReceiver
     fun inject(fragment: FragmentReceiver)
 
 
@@ -22,3 +21,5 @@ interface FragmentReceiverComponent {
     }
 
 }
+@Scope
+annotation class FragmentScope

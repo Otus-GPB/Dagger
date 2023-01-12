@@ -1,17 +1,14 @@
 package ru.otus.daggerhomework.dagger
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import ru.otus.daggerhomework.MainActivity
 import javax.inject.Named
 
 
-@Module()
+@Module
 class MainActivityModule {
    @ActivitySingleScope
    @Provides
