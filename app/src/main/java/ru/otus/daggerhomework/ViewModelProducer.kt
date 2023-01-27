@@ -5,10 +5,11 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
+import javax.inject.Named
 
 class ViewModelProducer @Inject constructor(
     private val colorGenerator: ColorGenerator,
-    val context: Context,
+    @Named("Activity") val context: Context,
     private val mutableData: MutableLiveData<Int>
 ) {
 
