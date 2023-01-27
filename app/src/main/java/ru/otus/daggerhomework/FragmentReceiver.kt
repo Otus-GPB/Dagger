@@ -13,13 +13,12 @@ import javax.inject.Inject
 class FragmentReceiver : Fragment() {
     private lateinit var frame: View
     @Inject
-    lateinit var recViewModel: InterfaceVMReceiver
+    lateinit var recViewModel: ViewModelReceiver
     override fun onAttach(context: Context) {
-        super.onAttach(context)
-        DaggerFragmentReceiverComponent.builder()
-            .activity((requireActivity() as MainActivity).mainComponent!!).fragment(this)
-            .build()
+        DaggerFragmentReceiverComponent.factory()
+            .create(this,((requireActivity() as MainActivity).mainComponent!!))
             .inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
