@@ -1,25 +1,23 @@
 package ru.otus.daggerhomework.dagger
 
+import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.otus.daggerhomework.FragmentReceiver
-import ru.otus.daggerhomework.ViewModelReceiver
 import javax.inject.Scope
 
 @FragmentScope
-@Component(dependencies = [MainActivityComponent::class], modules = [FragmentReceiverModule::class])
+@Component(dependencies = [MainActivityComponent::class])
 interface FragmentReceiverComponent {
+    val getAppContext: Context
     fun inject(fragment: FragmentReceiver)
 
-
-    @Component.Builder
-    interface BuilderFragmentReceiver {
-        @BindsInstance
-        fun fragment(fragment: FragmentReceiver): BuilderFragmentReceiver
-        fun activity(activity: MainActivityComponent): BuilderFragmentReceiver
-        fun build(): FragmentReceiverComponent
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance
+                   fragment: FragmentReceiver,
+                   activity: MainActivityComponent): FragmentReceiverComponent
     }
-
 }
 @Scope
 annotation class FragmentScope
