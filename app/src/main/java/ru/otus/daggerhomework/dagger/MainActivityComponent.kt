@@ -7,10 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Provides
-import ru.otus.daggerhomework.App
-import ru.otus.daggerhomework.FragmentProducer
-import ru.otus.daggerhomework.FragmentReceiver
-import ru.otus.daggerhomework.MainActivity
+import ru.otus.daggerhomework.*
 import javax.inject.Named
 import javax.inject.Scope
 
@@ -18,12 +15,15 @@ import javax.inject.Scope
 @Component(modules = [MainActivityModule::class], dependencies = [ApplicationComponent::class])
 interface MainActivityComponent {
     val getAppContext: Context
-    val getMainActivity: MainActivity
     val getMutableLivedata:MutableLiveData<Int>
+    val viewModelProducer:ViewModelProducer
+    val getInterfaceVMReceiver: ViewModelReceiver
+    fun inject(fragmentProducer: FragmentProducer)
 
     @Component.Factory
     interface FactoryMainActivityComponent {
-        fun create(@BindsInstance main: MainActivity, appComponent: ApplicationComponent): MainActivityComponent
+        fun create(@BindsInstance main: MainActivity,
+                   appComponent: ApplicationComponent): MainActivityComponent
     }
 }
 
