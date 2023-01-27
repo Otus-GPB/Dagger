@@ -15,11 +15,10 @@ class FragmentProducer : Fragment() {
     lateinit var viewModelProducer: ViewModelProducer
 
     override fun onAttach(context: Context) {
-        super.onAttach(context)
-        DaggerFragmentProducerComponent.builder()
-            .activity((requireActivity() as MainActivity).mainComponent!!).fragment(this)
-            .build()
+        DaggerFragmentProducerComponent.factory()
+            .create(this, ((requireActivity() as MainActivity).mainComponent!!))
             .inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
