@@ -1,21 +1,21 @@
 package ru.otus.daggerhomework.dagger
 
+import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.otus.daggerhomework.*
-import javax.inject.Scope
 
 @FragmentScope
-@Component(dependencies = [MainActivityComponent::class], modules = [FragmentProducerModule::class, Implement::class])
+@Component(dependencies = [MainActivityComponent::class])
 interface FragmentProducerComponent {
-
+    val getAppContext: Context
+    val viewModelProducer:ViewModelProducer
     fun inject(fragment: FragmentProducer)
 
-    @Component.Builder
-    interface BuilderFragmentProducer {
-        @BindsInstance
-        fun fragment(fragment: FragmentProducer): BuilderFragmentProducer
-        fun activity(activity: MainActivityComponent): BuilderFragmentProducer
-        fun build(): FragmentProducerComponent
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance
+                   fragment: FragmentProducer,
+                   activity: MainActivityComponent): FragmentProducerComponent
     }
 }
