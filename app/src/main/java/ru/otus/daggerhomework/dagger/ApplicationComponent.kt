@@ -4,16 +4,16 @@ package ru.otus.daggerhomework.dagger
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import ru.otus.daggerhomework.App
-import ru.otus.daggerhomework.MainActivity
+import javax.inject.Singleton
 
-@Component (modules = [Provider::class])
+@Component
+@Singleton
 interface ApplicationComponent {
     val getAppContext: Context
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance application: App): ApplicationComponent
+        fun create(@BindsInstance application: Context): ApplicationComponent
     }
 
 
